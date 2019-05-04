@@ -1,0 +1,41 @@
+ private void adicionarActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        if(validarDados()){
+            Funcionario fun = new Funcionario(nome.getText(),telefone.getText(),Integer.valueOf(idade.getText()),endereco.getText());
+
+            DefaultTableModel tabela = (DefaultTableModel)funcionarios.getModel();
+            tabela.addRow(fun.obterDados());
+
+            nome.setText("");
+            telefone.setText("");
+            idade.setText("");
+            endereco.setText("");
+        }
+    }                                         
+    public boolean validarDados(){
+        boolean valido = true;
+        
+        if(nome.getText().trim().length() == 0){
+            valido = false;
+            JOptionPane.showMessageDialog(this,"Campo nome obrigatorio!");
+        }
+        if(telefone.getText().trim().length() == 0){
+            valido = false;
+            JOptionPane.showMessageDialog(this,"Campo telefone obrigatorio!");
+        }
+        if(idade.getText().trim().length() == 0){
+            valido = false;
+            JOptionPane.showMessageDialog(this,"Campo idade obrigatorio!");
+        }
+        if(endereco.getText().trim().length() == 0){
+            valido = false;
+            JOptionPane.showMessageDialog(this,"Campo endereco obrigatorio!");
+        }
+        try{
+            Integer.valueOf(idade.getText());
+        } catch(Exception e ){
+            valido = false;
+            JOptionPane.showMessageDialog(this, "O campo idade aceita apenas numero inteiros.");
+        }
+            
+        return valido;
+    }
